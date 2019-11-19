@@ -1,0 +1,29 @@
+%h3
+  Alert
+
+- if (@alert.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Creation Problem
+    %p
+      There are some problems with this new  alert that you need to
+      correct before it can be created. Make sure at least one section is
+      filled out.
+
+.row
+  .col-md-6
+    = form_for(@alert, url: admin_alerts_path, method: :post) do |form|
+      = hidden_field_tag(:report_id, params[:report_id])
+      = render(partial: 'form', object: form)
+  .col-md-6.report_original
+    - if (@report)
+      %h4.header
+        Original Report
+      = render(partial: 'reports/show')
+    - else
+      %p
+        This is alert is not linked to any particular report.
+
+  .submit
+    = submit_tag('Create', class: 'btn btn-sm btn-primary external-submit', data: { form: '#new_alert' })
+    = link_to('Cancel', admin_alerts_path, class: 'btn btn-sm btn-default')

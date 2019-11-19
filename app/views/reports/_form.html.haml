@@ -1,0 +1,41 @@
+%h1
+  = @form.name
+
+.report_form
+  - if (@report.errors.present?)
+    .error
+      We need a bit more information before we can use this report.
+      Please be sure all required sections are filled out.
+  - else
+    .intro
+      %p
+        Thank you for taking the time to create a reporting and for helping to
+        keep sex workers safe. 
+      %p.max-640
+        %strong
+          NOTE:
+        We do not report bad dates to the police. If you'd like to
+        report directly to the police, we have a list of resources to support
+        you.
+  = form_tag(reports_path, method: :post) do
+    = hidden_field_tag('report[form_slug]', @form.slug)
+    = hidden_field_tag('report[form_version]', @version)
+
+    - if (@version)
+      = render(partial: 'reports/form_elements', object: @version.content)
+      .version
+        Version
+        = @version.version
+    - else
+      .version
+        No version found.
+
+    .submit
+      .advice.min-640
+        %p
+          %strong
+            NOTE:
+          We do not report bad dates to the police. If you'd like to
+          report directly to the police, we have a list of resources to support
+          you.
+      = submit_tag('Send')

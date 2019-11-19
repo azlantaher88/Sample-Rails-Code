@@ -1,0 +1,4 @@
+%ol
+  - reports.each do |hit|
+    %li.report
+      = link_to(hit.description, report_path(hit))

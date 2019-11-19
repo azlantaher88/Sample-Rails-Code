@@ -1,0 +1,19 @@
+%h3
+  Identifier
+
+- if (@identifier_type.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Creation Problem
+    %p
+      There are some problems with this identifier that you need to
+      correct before it can be updated.
+
+.row
+  .col-md-6
+    = form_for(@identifier_type, url: admin_identifier_type_path(@identifier_type), method: :put) do |form|
+      = render(partial: 'form', object: form)
+
+      .submit
+        = submit_tag('Update', class: 'btn btn-sm btn-primary external-submit', data: { form: '#edit_identifier_type' })
+        = link_to('Cancel', admin_identifier_types_path, class: 'btn btn-sm btn-default')

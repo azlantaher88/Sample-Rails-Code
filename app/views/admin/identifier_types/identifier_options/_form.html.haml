@@ -1,0 +1,6 @@
+.form-group{ class: form_group_class(@identifier_option, :code) }
+  %label.control-label{ for: 'identifier_option_content' }
+    Content
+  = form.text_field(:content, class: 'form-control focus')
+  .required
+    Required

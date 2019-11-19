@@ -1,0 +1,16 @@
+%h3
+  User
+
+- if (@user.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Problem Updating
+    %p
+      There are some problems with this user that you need to
+      correct before it can be updated.
+
+= form_for(@user, url: admin_member_path(@user), method: :put) do |form|
+  = render(partial: 'form', object: form)
+  .submit
+    = submit_tag('Update', class: 'btn btn-sm btn-primary')
+    = link_to('Cancel', admin_member_path(@user), class: 'btn btn-sm btn-default')

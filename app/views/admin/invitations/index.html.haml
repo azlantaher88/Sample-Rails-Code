@@ -1,0 +1,50 @@
+%h2
+  Invitations
+
+= selection_nav
+
+= paginate(@invitations)
+
+%table.admin
+  %thead
+    %tr
+      %th{ width: '10%' }
+        ID
+      %th{ width: '20%' }
+        Email
+      %th{ width: '15%' }
+        Role
+      %th{ width: '20%' }
+        Referred By
+      %th
+        Sent Date
+      %th
+        Status
+  %tbody
+    - @invitations.each do |invitation|
+      %tr.lg
+        %td
+          = link_to(invitation.id, admin_invitation_path(invitation))
+        %td
+          = link_to(invitation.email, admin_invitation_path(invitation))
+        %td
+          - effective_role = invitation.role || 'guest'
+          .tag{ class: h(effective_role) }
+            = effective_role.titleize
+        %td
+          - if (user = invitation.inviting_user)
+            = link_to(user.email, admin_member_path(user))
+        %td
+          .timeline
+            = invitation.created_at.to_s(:long)
+        %td
+          .tag{ class: invitation.state }
+            = invitation.state
+    - if (@invitations.empty?)
+      %tr
+        %td{ colspan: 6 }
+          .empty
+            No invitations found.
+
+- right_column do
+  = render(partial: 'sidebar')

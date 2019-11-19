@@ -1,0 +1,17 @@
+%h3
+  Mailing List
+
+- if (@mailing_list.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Creation Problem
+    %p
+      There are some problems with this new mailing list that you need to
+      correct before it can be created.
+
+= form_for(@mailing_list, url: admin_mailing_lists_path, method: :post) do |form|
+  = render(partial: 'form', object: form)
+
+  .submit
+    = submit_tag('Create', class: 'btn btn-sm btn-primary')
+    = link_to('Cancel', admin_mailing_lists_path, class: 'btn btn-sm btn-default')

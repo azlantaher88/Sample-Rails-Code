@@ -1,0 +1,94 @@
+%h3
+  Identifier
+
+.row
+  .col-md-2
+    %strong
+      Code
+  .col-md-10
+    = @identifier_type.code
+
+.row
+  .col-md-2
+    %strong
+      Public Label
+  .col-md-10
+    = @identifier_type.label
+
+.row
+  .col-md-2
+    %strong
+      Record Type
+  .col-md-10
+    = @identifier_type.record_type
+
+.row
+  .col-md-2
+    %strong
+      Selection Type
+  .col-md-10
+    = IdentifierType.selection_types[@identifier_type.selection_type]
+
+.row
+  .col-md-2
+    %strong
+      Allow User Input
+  .col-md-10
+    = @identifier_type.input ? 'Yes' : 'No'
+
+- if (@identifier_type.required?)
+  .row
+    .col-md-2
+      %strong
+        Required
+    .col-md-10
+      Yes
+- if (@identifier_type.published?)
+  .row
+    .col-md-2
+      %strong
+        Published At
+    .col-md-10
+      = @identifier_type.published_at.to_s(:long)
+      = '(%s ago)' % time_ago_in_words(@identifier_type.published_at)
+
+- if (@identifier_type.selection_type?)
+  .row
+    .col-md-9
+      %h4
+        Assignable Options
+    .col-md-3
+      .selection_actions
+        = link_to('New Option', new_admin_identifier_type_identifier_option_path(@identifier_type), class: 'btn btn-sm btn-success')
+
+  .row
+    .col-md-12
+      %table.admin
+        %thead
+          %tr
+            %th{ width: '10%' }
+              ID
+            %th{ width: '90%' }
+              Content
+        %tbody
+          - @identifier_type.options.each do |identifier_option|
+            %tr.lg
+              %td
+                = link_to(identifier_option.id, edit_admin_identifier_type_identifier_option_path(@identifier_type, identifier_option))
+              %td
+                = link_to(identifier_option.content, edit_admin_identifier_type_identifier_option_path(@identifier_type, identifier_option))
+          - if (@identifier_type.options.empty?)
+            %tr
+              %td{ colspan: 2 }
+                .empty
+                  No options found.
+
+.submit
+  - if (@identifier_type.published?)
+    = link_to('Unpublish', admin_identifier_type_path(@identifier_type, published: 0), class: 'btn btn-sm btn-danger', method: :put)
+  - else
+    - unless (@identifier_type.required?)
+      = link_to('Publish', admin_identifier_type_path(@identifier_type, published: 1), class: 'btn btn-sm btn-success', method: :put)
+    = link_to('Edit', edit_admin_identifier_type_path(@identifier_type), class: 'btn btn-sm btn-default')
+    - unless (@identifier_type.required?)
+      = link_to('Delete', admin_identifier_type_path(@identifier_type), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure you want to delete this identifier?" })

@@ -1,0 +1,30 @@
+.element-group
+  - case (form_elements)
+  - when Array
+    - form_elements.each do |e|
+      .element{ { class: e['if'] ? ('if-%s' % e['if']) : '' } }
+        - case (e)
+        - when Hash
+          - case (e['type'])
+          - when 'section'
+            = render(partial: 'reports/form_section', object: e)
+          - when 'checkbox'
+            = render(partial: 'reports/form_checkbox', object: e)
+          - when 'options'
+            = render(partial: 'reports/form_options', object: e)
+          - when 'question'
+            = render(partial: 'reports/form_question', object: e)
+          - when 'select'
+            = render(partial: 'reports/form_select', object: e)
+          - else
+            .error
+              = 'Unknown type %s' % e['type']
+        - when Array
+          - e.each do |_e|
+            = render(partial: 'reports/form_element', object: _e)
+        - else
+          .error
+            = 'Unexpected %s in form' % e.class
+  - else
+    .error
+      = 'Unexpected %s in form' % form_elements.class

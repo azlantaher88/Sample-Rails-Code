@@ -1,0 +1,35 @@
+%h2
+  Invitations
+
+%table.table.admin
+  %tbody
+    %tr
+      %th
+        Email
+      %td
+        = @invitation.email
+
+    - if (@invitation.message?)
+      %tr
+        %th
+          Comment
+        %td
+          = @invitation.message
+
+    - if (inviting_user = @invitation.inviting_user)
+      %tr
+        %th
+          Invited By
+        %td
+          = link_to(inviting_user.email, admin_member_path(inviting_user))
+          on 
+          = @invitation.created_at.to_s(:long)
+
+    - if (registered_user = @invitation.registered_user)
+      %tr
+        %th
+          Registered As
+        %td
+          = link_to(registered_user.email, admin_member_path(registered_user))
+          on
+          = registered_user.created_at.to_s(:long)

@@ -1,0 +1,35 @@
+.row
+  #signup.col-md-12
+    %h2
+      Log In
+
+    .content
+      = cms_snippet_content('login', @cms_site).html_safe
+
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label(:email)
+      .field_value
+        = f.email_field(:email, autofocus: true)
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label(:password)
+      .field_value
+        = f.password_field(:password, autocomplete: "off")
+
+  - if (devise_mapping.rememberable?)
+    .row
+      .col-md-6.col-xs-12
+        .field_value
+          = f.check_box(:remember_me)
+          = f.label(:remember_me)
+
+  .row
+    .actions.col-md-6
+      = f.submit("Log in")
+
+.row.col-md-12
+  = render("devise/shared/links")

@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Sample Form",
+    "id": "sf",
+    "type": "section",
+    "data": [
+      {
+        "title": "Sample Options",
+        "type": "options",
+        "data": [
+          {
+            "title": "a"
+          },
+          {
+            "title": "b"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+.form-group{ class: form_group_class(@vehicle, :license) }
+  %label.control-label{ for: 'user_email' }
+    License
+  = form.text_field(:license, class: 'form-control focus')
+  .required
+    Required

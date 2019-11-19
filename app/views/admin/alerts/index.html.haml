@@ -1,0 +1,53 @@
+%h2
+  Alerts
+
+= paginate(@alerts)
+
+.selection_actions
+  = link_to('New Alert', new_admin_alert_path, class: 'btn btn-sm btn-success')
+= selection_nav
+
+%table.admin
+  %thead
+    %tr
+      %th{ style: 'width: 60%' }
+        Details
+      %th
+        Status
+      %th
+        Timeline
+  %tbody
+    - @alerts.each do |alert|
+      %tr.lg
+        %td
+          = link_to(alert.headline, admin_alert_path(alert))
+        %td
+          - if (alert.published?)
+            .tag.published
+              Published
+        %td
+          .timeline
+            = alert.created_at.to_s(:long)
+            .action
+              Created
+    - if (@alerts.empty?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No alerts.
+
+- right_column do
+  .mini_help
+    %p
+      %strong
+        Note:
+      Only published alerts will show up on the
+      public alerts page.
+
+    %p
+      You can keep alerts in an unpublished state if you want
+      to review them before making them live.
+
+    %p
+      You can create a new alert from scratch, or go to a particular
+      report that's been made and press the "Make Alert" button.

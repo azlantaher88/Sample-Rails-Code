@@ -1,0 +1,44 @@
+%h2
+  Identifiers
+
+= selection_nav
+
+.selection_actions
+  = link_to('New Identifier', new_admin_identifier_type_path, class: 'btn btn-sm btn-success')
+= paginate(@identifier_types)
+
+%table.admin
+  %thead
+    %tr
+      %th{ width: '10%' }
+        ID
+      %th{ width: '15%' }
+        Type
+      %th{ width: '20%' }
+        Code
+      %th
+        Label
+      %th{ width: '15%' }
+        Status
+  %tbody
+    - @identifier_types.each do |identifier_type|
+      %tr.lg
+        %td
+          = link_to(identifier_type.id, admin_identifier_type_path(identifier_type))
+        %td
+          = identifier_type.record_type
+        %td
+          = link_to(identifier_type.code, admin_identifier_type_path(identifier_type))
+        %td
+          = link_to(identifier_type.label, admin_identifier_type_path(identifier_type))
+        %td
+          .tag{ class: identifier_type.state }
+            = identifier_type.state
+    - if (@identifier_types.empty?)
+      %tr
+        %td{ colspan: 6 }
+          .empty
+            No identifiers found.
+
+- right_column do
+  = render(partial: 'sidebar')

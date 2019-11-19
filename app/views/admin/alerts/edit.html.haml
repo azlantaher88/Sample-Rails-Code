@@ -1,0 +1,18 @@
+%h3
+  Alert
+
+- if (@alert.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Update Problem
+    %p
+      There are some problems with this alert that you need to
+      correct before it can be updated. Make sure at least one section is
+      filled out.
+
+= form_for(@alert, url: admin_alert_path(@alert), method: :put) do |form|
+  = render(partial: 'form', object: form)
+
+  .submit
+    = submit_tag('Update', class: 'btn btn-sm btn-primary')
+    = link_to('Cancel', admin_alert_path(@alert), class: 'btn btn-sm btn-default')

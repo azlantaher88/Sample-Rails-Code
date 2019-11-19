@@ -1,0 +1,63 @@
+.row
+  #signup.col-md-12
+    %h2
+      Sign up
+
+    .content
+      = cms_snippet_content('register', @cms_site).html_safe
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  = hidden_field_tag(:invitation_token, params[:invitation_token] || params[:v])
+
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label(:email)
+      .field_input
+        = f.email_field(:email, autofocus: true, class: form_error_style(resource, :email))
+    .field_hint.col-md-6.col-xs-12
+      Please sign up with the email address associated with your sex work business.
+
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label :password
+        - if (@minimum_password_length)
+          %em
+            (#{@minimum_password_length} characters minimum, requires one symbol or number)
+      .field_input
+        = f.password_field(:password, autocomplete: 'off', class: form_error_style(resource, :password))
+
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label(:password_confirmation)
+      .field_input
+        = f.password_field(:password_confirmation, autocomplete: 'off', class: form_error_style(resource, :password_confirmation))
+
+  .row
+    .field.col-md-6.col-xs-12
+      .field_label
+        = f.label(:signup_request, 'About Me')
+      .field_input
+        = f.text_area(:signup_request, rows: 12, class: form_error_style(resource, :signup_request))
+    .field_hint.col-md-6.col-xs-12
+      This site is restricted to sex workers only, so we require proof that
+      you're a worker. This can be a recent online ad, your website, your
+      Twitter account, or anything else you use to promote yourself.
+
+  .row
+    .col-md-12
+      %p
+        You'll receive an email with a link in it to confirm your email address.
+        If for some reason you can't find this, check in any "Spam" folder you
+        might have in case it ended up there. If you want another email,
+        you can
+        = link_to('request it be sent again', new_user_confirmation_path) + '.'
+
+  .actions
+    = f.submit("Sign up")
+
+= render("devise/shared/links")
+

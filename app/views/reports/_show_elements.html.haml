@@ -1,0 +1,30 @@
+.element
+  - case (show_elements)
+  - when Array
+    - show_elements.each do |e|
+      - case (e)
+      - when Hash
+        - case (e['type'])
+        - when 'section'
+          - @section_depth ||= 0
+          = render(partial: 'reports/show_section', object: e)
+        - when 'checkbox'
+          = render(partial: 'reports/show_checkbox', object: e)
+        - when 'options'
+          = render(partial: 'reports/show_options', object: e)
+        - when 'question'
+          = render(partial: 'reports/show_question', object: e)
+        - when 'select'
+          = render(partial: 'reports/show_select', object: e)
+        - else
+          .error
+            = 'Unknown type %s' % e['type']
+      - when Array
+        - e.each do |_e|
+          = render(partial: 'show_element', object: _e)
+      - else
+        .error
+          = 'Unexpected %s in form' % e.class
+  - else
+    .error
+      = 'Unexpected %s in form' % show_elements.class

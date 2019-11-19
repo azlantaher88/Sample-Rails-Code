@@ -1,0 +1,35 @@
+%h2
+  News Items
+
+= paginate(@news_items)
+
+= selection_nav
+
+%table.admin
+  %thead
+    %tr
+      %th{ style: 'width: 60%' }
+        Details
+      %th
+        Status
+      %th
+        Timeline
+  %tbody
+    - @news_items.each do |news_item|
+      %tr.lg
+        %td
+          = news_item.headline
+        %td
+          - if (news_item.published?)
+            .tag.published
+              Published
+        %td
+          .timeline
+            = news_item.created_at.to_s(:long)
+            .action
+              Registered
+    - if (@news_items.empty?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No news items.

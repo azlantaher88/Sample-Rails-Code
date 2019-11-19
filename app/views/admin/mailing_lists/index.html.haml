@@ -1,0 +1,42 @@
+%h2
+  Mailing Lists
+
+= paginate(@mailing_lists)
+
+= selection_nav
+
+%table.admin
+  %thead
+    %tr
+      %th
+        Name
+      %th{ style: 'width: 60%' }
+        Public Description
+      %th
+        Status
+      %th
+        Timeline
+  %tbody
+    - @mailing_lists.each do |mailing_list|
+      %tr.lg
+        %td
+          = link_to(mailing_list.name, admin_mailing_list_path(mailing_list))
+        %td
+          = mailing_list.description
+        %td
+          - if (mailing_list.published?)
+            .tag.published
+              Published
+        %td
+          .timeline
+            = mailing_list.created_at.to_s(:long)
+            .action
+              Created
+    - if (@mailing_lists.empty?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No mailing lists.
+
+.submit
+  = link_to('New', new_admin_mailing_list_path, class: 'btn btn-sm btn-success')

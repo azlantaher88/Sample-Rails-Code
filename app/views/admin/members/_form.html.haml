@@ -1,0 +1,31 @@
+.form-group{ class: form_group_class(@user, :email) }
+  %label.control-label{ for: 'user_email' }
+    Name
+  = form.text_field(:email, class: 'form-control focus')
+  .required
+    Required
+
+.form-group{ class: form_group_class(@user, :name) }
+  %label.control-label{ for: 'user_name' }
+    Name
+  = form.text_field(:name, class: 'form-control')
+
+.form-group{ class: form_group_class(@user, :organization) }
+  %label.control-label{ for: 'user_name' }
+    Organization
+  = form.text_field(:organization, class: 'form-control')
+
+.form-group
+  %label.control-label{ for: 'user_role' }
+    Role
+  = form.select(:role, User.roles_for_select, class: 'form-control')
+
+.form-group
+  %h5
+    Mailing List Membership
+- MailingList.for_role(@user.effective_role).each do |mailing_list|
+  .form-group
+    - id = 'user_mailing_list_%s' % mailing_list.id
+    = check_box_tag('user[mailing_list_ids][]', mailing_list.id, @user.mailing_lists.include?(mailing_list), id: id)
+    %label{ for: id }
+      = mailing_list.name

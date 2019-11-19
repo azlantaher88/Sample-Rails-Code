@@ -1,0 +1,38 @@
+%h2
+  Bad Dates
+
+= selection_nav
+
+= paginate(@people)
+
+%table.admin
+  %thead
+    %tr
+      %th{ style: 'width: 60%' }
+        Name
+      %th
+        Status
+      %th
+        Timeline
+  %tbody
+    - @people.each do |person|
+      %tr.lg
+        %td
+          = link_to(person.description, admin_person_path(person))
+        %td
+          - if (person.deleted?)
+            .tag.deleted
+              Deleted
+          - else
+            .tag.plain
+              Published
+        %td
+          .timeline
+            = person.created_at.to_s(:long)
+            .action
+              Reported
+    - if (@people.empty?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No bad dates found.

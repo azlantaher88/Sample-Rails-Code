@@ -1,0 +1,19 @@
+- if (display?(show_section))
+  - depth = @section_depth
+  .section
+    - @section_depth += 1
+    %h2{ class: 'section-depth%d' % @section_depth }
+      = show_section['title']
+
+      - if (@tag_display and show_section['tag'])
+        .tag
+          = show_section['tag']
+
+    - if (data = show_section['data'])
+      - case (data)
+      - when Array
+        = render(partial: 'reports/show_elements', object: data)
+      - else
+        .error
+          = 'Unexpected %s in form' % e.class
+  - @section_depth = depth

@@ -1,0 +1,12 @@
+.form-group{ class: form_group_class(@alert, :headline) }
+  %label.control-label{ for: 'alert_headline' }
+    Headline
+  = form.text_field(:headline, class: 'form-control focus')
+  .required
+    Required
+
+- @alert.metadata.each do |name, text|
+  .form-group
+    %label.control-label{ for: 'alert_%s' % name }
+      = name.titleize
+    = text_area_tag('alert[metadata][%s]' % name, text, class: 'form-control', rows: 5)

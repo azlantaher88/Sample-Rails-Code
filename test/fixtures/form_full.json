@@ -1,0 +1,662 @@
+[
+  {
+    "title": "Incident Type",
+    "id": "it",
+    "type": "section",
+    "data": [
+      {
+        "title": "Violence",
+        "id": "-vi",
+        "type": "options",
+        "data": [
+          {
+            "title": "they were physically abusive"
+          },
+          {
+            "title": "they were aggressive/rough"
+          },
+          {
+            "title": "they physically assaulted me",
+            "id": "-assault"
+          },
+          {
+            "title": "they choked me",
+            "if": "-assault"
+          },
+          {
+            "title": "they pulled my hair",
+            "if": "-assault"
+          },
+          {
+            "title": "they punched me",
+            "if": "-assault"
+          },
+          {
+            "title": "they slapped me",
+            "if": "-assault"
+          },
+          {
+            "title": "other",
+            "if": "-assault",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Theft",
+        "id": "-th",
+        "type": "options",
+        "data": [
+          {
+            "title": "they robbed me"
+          },
+          {
+            "title": "they refused to pay me",
+            "id": "-refused"
+          },
+          {
+            "title": "before the session",
+            "if": "-refused"
+          },
+          {
+            "title": "after the session",
+            "if": "-refused"
+          },
+          {
+            "title": "they short changed me"
+          },
+          {
+            "title": "they gave me bad drugs"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Time Wasting",
+        "id": "it_tw",
+        "type": "options",
+        "data": [
+          {
+            "title": "they booked and didn't show up"
+          },
+          {
+            "title": "they are a time waster"
+          },
+          {
+            "title": "they haggled my rate"
+          },
+          {
+            "title": "they sent a lot of texts"
+          },
+          {
+            "title": "they sent a lot of emails"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Shitty Behaviour",
+        "id": "it_ms",
+        "type": "options",
+        "data": [
+          {
+            "title": "they were creepy"
+          },
+          {
+            "title": "they were rude"
+          },
+          {
+            "title": "they gave me a bad feeling"
+          },
+          {
+            "title": "they were verbally abusive"
+          },
+          {
+            "title": "they were under the influence of drugs or alcohol"
+          },
+          {
+            "title": "they had bad hygeine"
+          },
+          {
+            "title": "they had sores on their genitals"
+          },
+          {
+            "title": "they requested unreasonable services"
+          },
+          {
+            "title": "they pushed my boundaries"
+          },
+          {
+            "title": "they refused to wear a condom"
+          },
+          {
+            "title": "they forced me to do something I didn't agree to"
+          },
+          {
+            "title": "they drugged me"
+          },
+          {
+            "title": "they harassed me"
+          },
+          {
+            "title": "they stalked me"
+          },
+          {
+            "title": "they threatened me"
+          },
+          {
+            "title": "they were not alone"
+          },
+          {
+            "title": "they impersonated a police officer"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "When and Where",
+    "id": "ww",
+    "type": "section",
+    "data": [
+      {
+        "title": "Where did you meet this bad date?",
+        "id": "-meet",
+        "type": "section",
+        "data": [
+          {
+            "title": "date",
+            "input": true
+          },
+          {
+            "title": "time",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "How did this bad date find you?",
+        "id": "-find",
+        "type": "options",
+        "data": [
+          {
+            "title": "in person / on the street"
+          },
+          {
+            "title": "now magazine print ad"
+          },
+          {
+            "title": "online",
+            "id": "-online"
+          },
+          {
+            "title": "my website",
+            "if": "-online"
+          },
+          {
+            "title": "my twitter",
+            "if": "-online"
+          },
+          {
+            "title": "my online ad",
+            "id": "-online_ad",
+            "if": "-online"
+          },
+          {
+            "title": "backpage",
+            "if": "-online_ad"
+          },
+          {
+            "title": "terb",
+            "if": "-online_ad"
+          },
+          {
+            "title": "eros guide",
+            "if": "-online_ad"
+          },
+          {
+            "title": "craigslist",
+            "if": "-online_ad"
+          },
+          {
+            "title": "redzone",
+            "if": "-online_ad"
+          },
+          {
+            "title": "shemale Canada",
+            "if": "-online_ad"
+          },
+          {
+            "title": "other",
+            "id": "-online_ad_other",
+            "if": "-online_ad",
+            "input": true
+          },
+          {
+            "title": "other",
+            "id": "-other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "How did this bad date contact you?",
+        "type": "options",
+        "data": [
+          {
+            "title": "in person"
+          },
+          {
+            "title": "phone call"
+          },
+          {
+            "title": "text message"
+          },
+          {
+            "title": "email"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Where did this bad date happen?",
+        "hint": "(Example: in their vehicle, in a hotel or motel, etc.)",
+        "input": true,
+        "lines": 6
+      }
+    ]
+  },
+  {
+    "title": "Desciption of Vehicle",
+    "type": "section",
+    "target": "vehicle",
+    "data": [
+      {
+        "title": "Colour",
+        "id": "-color"
+      },
+      {
+        "title": "License Plate",
+        "id": "-license"
+      },
+      {
+        "title": "Car Model",
+        "id": "-model"
+      },
+      {
+        "title": "Car Type",
+        "id": "-type",
+        "type": "select",
+        "data": [
+          {
+            "title": "Sedan"
+          },
+          {
+            "title": "Hatch Back"
+          },
+          {
+            "title": "Sports Car"
+          },
+          {
+            "title": "Convertible"
+          },
+          {
+            "title": "Station Wagon"
+          },
+          {
+            "title": "SUV"
+          },
+          {
+            "title": "Minivan"
+          },
+          {
+            "title": "Panel Van"
+          },
+          {
+            "title": "Pick Up Truck"
+          },
+          {
+            "title": "Cube Van"
+          }
+        ]
+      },
+      {
+        "title": "Did the vehicle have a smell?",
+        "id": "-smell",
+        "type": "options",
+        "data": [
+          {
+            "title": "Cigarettes"
+          },
+          {
+            "title": "Cologne"
+          },
+          {
+            "title": "Alcohol"
+          },
+          {
+            "title": "Pot"
+          },
+          {
+            "title": "Crack"
+          },
+          {
+            "title": "Heroin"
+          },
+          {
+            "title": "Pets"
+          },
+          {
+            "title": "Cigars"
+          },
+          {
+            "title": "Other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Anything else about the car?",
+        "id": "-details",
+        "hint": "Example: Aything on the seat? Was the car dirty, clean, rusty, etc?",
+        "input": true
+      }
+    ]
+  },
+  {
+    "title": "Bad Date Description",
+    "id": "person",
+    "type": "section",
+    "target": "person",
+    "data": [
+      {
+        "title": "Age",
+        "input": true
+      },
+      {
+        "title": "Gender",
+        "type": "select",
+        "data": [
+          {
+            "title": "male"
+          },
+          {
+            "title": "female"
+          },
+          {
+            "title": "trans"
+          },
+          {
+            "title": "other"
+          }
+        ]
+      },
+      {
+        "title": "Hair colour",
+        "type": "select",
+        "data": [
+          {
+            "title": "blonde"
+          },
+          {
+            "title": "brown"
+          },
+          {
+            "title": "black"
+          },
+          {
+            "title": "red"
+          },
+          {
+            "title": "grey"
+          },
+          {
+            "title": "bald"
+          },
+          {
+            "title": "other"
+          }
+        ]
+      },
+      {
+        "title": "Hair type",
+        "type": "select",
+        "data": [
+          {
+            "title": "short"
+          },
+          {
+            "title": "long"
+          },
+          {
+            "title": "straight"
+          },
+          {
+            "title": "curly"
+          },
+          {
+            "title": "shaved"
+          },
+          {
+            "title": "balding"
+          },
+          {
+            "title": "bald"
+          },
+          {
+            "title": "other"
+          }
+        ]
+      },
+      {
+        "title": "Eye colour",
+        "type": "select",
+        "data": [
+          {
+            "title": "blue"
+          },
+          {
+            "title": "green"
+          },
+          {
+            "title": "brown"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Facial hair",
+        "type": "select",
+        "data": [
+          {
+            "title": "none"
+          },
+          {
+            "title": "short beard"
+          },
+          {
+            "title": "long beard"
+          },
+          {
+            "title": "mustache"
+          },
+          {
+            "title": "goatee"
+          },
+          {
+            "title": "stubble"
+          },
+          {
+            "title": "sideburns"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Ethnicity",
+        "input": true
+      },
+      {
+        "title": "Glasses",
+        "type": "select",
+        "data": [
+          {
+            "title": "yes"
+          },
+          {
+            "title": "no"
+          },
+          {
+            "title": "sunglasses"
+          }
+        ]
+      },
+      {
+        "title": "Height",
+        "type": "select",
+        "data": [
+          {
+            "title": "short"
+          },
+          {
+            "title": "tall"
+          },
+          {
+            "title": "average"
+          }
+        ]
+      },
+      {
+        "title": "Body Type",
+        "input": true
+      },
+      {
+        "title": "Accent",
+        "input": true
+      },
+      {
+        "title": "Any marks or features on their body?",
+        "type": "options",
+        "data": [
+          {
+            "title": "tattoo"
+          },
+          {
+            "title": "scar"
+          },
+          {
+            "title": "birthmark"
+          },
+          {
+            "title": "piercing"
+          },
+          {
+            "title": "moles"
+          },
+          {
+            "title": "other",
+            "input": true
+          }
+        ]
+      },
+      {
+        "title": "Can you describe these marks or features?",
+        "input": true
+      },
+      {
+        "title": "Can you describe their clothing or jewelry?",
+        "input": true,
+        "lines": 4
+      }
+    ]
+  },
+  {
+    "title": "Incident",
+    "type": "section",
+    "data": [
+      {
+        "title": "In your own words, describe what the bad date did and said.",
+        "id": "-description",
+        "hint": "Sometimes the bad dates use the same opening line or phrase. What was the first thing the bad date said to you?",
+        "input": true,
+        "lines": 12,
+        "required": true
+      }
+    ]
+  },
+  {
+    "title": "Reporting",
+    "id": "report",
+    "type": "section",
+    "data": [
+      {
+        "title": "Have you reported this bad date anywhere else?",
+        "input": true
+      },
+      {
+        "title": "Do you want this listed in the next bad date booklet?",
+        "hint": "The bad date booklet is printed and distributed only to places which serve sex workers.",
+        "id": "-booklet",
+        "type": "select",
+        "data": [
+          {
+            "title": "yes"
+          },
+          {
+            "title": "no"
+          }
+        ]
+      },
+      {
+        "title": "Do you want this listed in the online bad date database?",
+        "hint": "We do our best to ensure only sex workers and those who assist sex workers reporting bad dates have access to the online database and this database is password protected.",
+        "id": "-online",
+        "type": "select",
+        "data": [
+          {
+            "title": "yes"
+          },
+          {
+            "title": "no"
+          }
+        ]
+      },
+      {
+        "title": "Do you want to report this bad date to police?",
+        "hint": "We do not report bad dates to the police without the permission of the person reporting the bad date. If you'd like to report to the police we have a list of resources to support you.",
+        "id": "-police",
+        "type": "select",
+        "data": [
+          {
+            "title": "yes"
+          },
+          {
+            "title": "no"
+          },
+          {
+            "title": "maybe"
+          }
+        ]
+      }
+    ]
+  }
+]

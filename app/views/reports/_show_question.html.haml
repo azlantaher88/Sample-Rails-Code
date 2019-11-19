@@ -1,0 +1,13 @@
+.question
+  .title
+    = show_question['title']
+
+    - if (@tag_display and show_question['tag'])
+      .tag
+        = show_question['tag']
+
+  - case (show_question['lines'])
+  - when Fixnum
+    = text_area_tag('report[content][%s]' % show_question['id'], @report.content[show_question['id']], cols: 60, rows: show_question['lines'], disabled: true)
+  - else
+    = text_field_tag('report[content][%s]' % show_question['id'], @report.content[show_question['id']], disabled: true)

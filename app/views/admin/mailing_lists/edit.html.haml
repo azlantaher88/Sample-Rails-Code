@@ -1,0 +1,17 @@
+%h3
+  Mailing List
+
+- if (@mailing_list.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Problem Updating
+    %p
+      There are some problems with this mailing list that you need to
+      correct before it can be updated.
+
+= form_for(@mailing_list, url: admin_mailing_list_path(@mailing_list), method: :put) do |form|
+  = render(partial: 'form', object: form)
+
+  .submit
+    = submit_tag('Update', class: 'btn btn-sm btn-primary')
+    = link_to('Cancel', admin_mailing_list_path(@mailing_list), class: 'btn btn-sm btn-default')

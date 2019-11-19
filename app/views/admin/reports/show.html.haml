@@ -1,0 +1,79 @@
+.admin-summary
+  %h2
+    Bad Date Report
+    = '#%d' % @report.id
+
+  .timeline
+    = @report.created_at.to_s(:long)
+
+  - admin_tags = @report.admin_tags
+  - if (admin_tags.any?)
+    .tags
+      - admin_tags.each do |tag|
+        = link_to(tag_label(tag), admin_reports_path(selection_params(tag: tag)), class: 'tag admin-tag')
+
+.report_form
+  = render(partial: 'reports/show')
+  .submit
+    - if (@report.published?)
+      = link_to('Unpublish', unpublish_admin_report_path(@report), method: :put, class: 'btn btn-warning btn-sm')
+    - elsif (@report.publishable? and @report.valid?)
+      = link_to('Publish', publish_admin_report_path(@report), method: :put, class: 'btn btn-success btn-sm')
+    - if (@report.deleted?)
+      = link_to('Undelete', undelete_admin_report_path(@report), method: :put, class: 'btn btn-warning btn-sm')
+    - else
+      = link_to('Delete', admin_report_path(@report), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: "Are you sure you want to delete this report?" })
+    - if (@report.news_item)
+      = link_to('View Alert', admin_alert_path(@report.news_item), class: 'btn btn-sm btn-default')
+    - elsif (@report.allow_alert?)
+      = link_to('Make Alert', new_admin_alert_path(report_id: @report), class: 'btn btn-sm btn-danger')
+    = link_to('Edit', edit_admin_report_path(@report), class: 'btn btn-default btn-sm')
+    - unless (@report.published? or @report.publishable? or !@report.allow_publish?)
+      .notice
+        This report needs a description before it can be published.
+
+    - records = @report.associated_record_types
+    - if (records.any? and @report.publishable? and !@report.published?)
+      .notice
+        Publishing this report will also create a listing for the
+        = records.collect(&:downcase).join(' and ') + '.'
+
+- right_column do
+  .mini_help
+    - if (@report.published?)
+      %p
+        This report has
+        = link_to('been published', report_path(@report)) + '.'
+      - if (@report.people.any? or @report.vehicles.any?)
+        .checklist
+          Searchable Records
+        %ul.checklist_items
+          - if (@report.people.any?)
+            - @report.people.each do |person|
+              %li
+                = link_to('Bad Date', admin_person_path(person))
+          - if (@report.vehicles.any?)
+            - @report.vehicles.each do |vehicle|
+              %li
+                = link_to('Vehicle', admin_vehicle_path(vehicle))
+    - else 
+      - if (@report.allow_publish? and !@report.publishable?)
+        .checklist.required
+          Description
+        %p
+          You need to create a summary description of this incident in order
+          to publish it. You can fix this by using "Edit".
+
+      - if (@report.will_create_person?)
+        .checklist.done
+          Bad Date
+        %p
+          This report has enough information about the bad date involved
+          that a searchable record of will be created when it's published.
+
+      - if (@report.will_create_vehicle?)
+        .checklist.done
+          Vehicle
+        %p
+          This report has enough information about the vehicle involved
+          that a searchable record of will be created when it's published.

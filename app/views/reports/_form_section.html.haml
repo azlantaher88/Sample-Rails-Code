@@ -1,0 +1,17 @@
+- if (display?(form_section))
+  .section{ class: display_class(form_section)  }
+    %h2
+      = form_section['title']
+
+    - if (form_section['private'])
+      .private_section
+        Anything you put in this section will be kept private and won't be
+        shared with other people who have access to the list.
+
+    - if (data = form_section['data'])
+      - case (data)
+      - when Array
+        = render(partial: 'reports/form_elements', object: data)
+      - else
+        .error
+          = 'Unexpected %s in form' % e.class

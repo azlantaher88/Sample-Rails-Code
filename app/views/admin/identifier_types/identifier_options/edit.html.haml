@@ -1,0 +1,19 @@
+%h3
+  Identifier Option
+
+- if (@identifier_option.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Creation Problem
+    %p
+      There are some problems with this new identifier option that you need to
+      correct before it can be created.
+
+.row
+  .col-md-6
+    = form_for(@identifier_option, url: admin_identifier_type_identifier_option_path(@identifier_type, @identifier_option), method: :put) do |form|
+      = render(partial: 'form', object: form)
+
+      .submit
+        = submit_tag('Update', class: 'btn btn-sm btn-primary external-submit', data: { form: '#new_identifier_option' })
+        = link_to('Cancel', admin_identifier_type_path(@identifier_type), class: 'btn btn-sm btn-default')

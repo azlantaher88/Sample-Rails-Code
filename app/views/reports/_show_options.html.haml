@@ -1,0 +1,26 @@
+.options
+  %h3
+    = show_options['title']
+
+    - if (@tag_display and show_options['tag'])
+      .tag
+        = show_options['tag']
+
+  - case (data = show_options['data'])
+  - when Array
+    - ifs = Hash.new(0)
+    - data.each do |option|
+      - if (option['if'])
+        - ifs[option['id']] = ifs[option['if']] + 1
+      .option{ class: option['if'] ? ('if%d if-%s' % [ ifs[option['id']], option['if'] ]) : '' }
+        = check_box_tag('report[content][%s][]' % show_options['id'], option['id'], report_checked?(show_options['id'], option['id']), id: option['id'], disabled: true)
+        %label{ for: option['id'] }
+          = option['title']
+        - if (option['input'])
+          = text_field_tag('report[content][%s]' % option['id'], report_value(option['id']), disabled: true)
+        - if (@tag_display and option['tag'])
+          .tag
+            = option['tag']
+  - else
+    .error
+      = 'Unexpected %s in options' % data.class

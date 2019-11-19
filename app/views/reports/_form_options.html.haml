@@ -1,0 +1,19 @@
+.options{ class: report_missing?(form_options['id']) ? 'missing' : nil }
+  %h3
+    = form_options['title']
+
+  - case (data = form_options['data'])
+  - when Array
+    - ifs = Hash.new(0)
+    - data.each do |option|
+      - if (option['if'])
+        - ifs[option['id']] = ifs[option['if']] + 1
+      .option{ class: option['if'] ? ('if%d if-%s' % [ ifs[option['id']], option['if'] ]) : '' }
+        = check_box_tag('report[content][%s][]' % form_options['id'], option['id'], report_checked?(form_options['id'], option['id']), id: option['id'])
+        %label{ for: option['id'] }
+          = option['title']
+        - if (option['input'])
+          = text_field_tag('report[content][%s]' % option['id'], report_value(option['id']), class: 'option-input', id: option['id'] + '-input')
+  - else
+    .error
+      = 'Unexpected %s in options' % data.class

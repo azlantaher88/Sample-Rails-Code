@@ -1,0 +1,36 @@
+%h3
+  Vehicle
+
+%table.table
+  %tbody
+    %tr
+      %th
+        License
+      %td
+        = @vehicle.license
+
+    %tr
+      %th
+        Reported At
+      %td
+        = @vehicle.created_at.to_s(:long)
+        = '(%s ago)' % time_ago_in_words(@vehicle.created_at)
+
+    - @vehicle.details and @vehicle.details.each do |key, value|
+      - case (key)
+      - when 'can_describe'
+      - else
+        - if (value.present?)
+          %tr
+            %th
+              = key.titleize
+            %td
+              - case (value)
+              - when Array
+                = value.join(', ')
+              - else
+                = value
+
+.submit
+  = link_to('Edit', edit_admin_vehicle_path(@vehicle), class: 'btn btn-sm btn-default')
+  = link_to('Delete', admin_vehicle_path(@vehicle), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure you want to delete this vehicle?" })

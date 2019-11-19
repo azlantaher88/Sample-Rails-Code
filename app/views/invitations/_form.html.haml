@@ -1,0 +1,28 @@
+.invitation_form
+  - if (@invitation.errors.present?)
+    .error
+      We need a bit more information before we can invite someone.
+      Please be sure all required sections are filled out.
+  - else
+    .intro
+      %p
+        If you know other people who are involved in sex work that would
+        benefit from having access to the Bad Date List you can send them
+        an invitation here by email.
+      %p.max-640
+        %strong
+          NOTE:
+        Anyone you invite may be required to provide some proof that
+        they're a worker.
+  = form_for(@invitation, url: invitations_path, method: :post) do |form|
+    .form-section
+      = form.label(:email, 'Email Address')
+      = form.text_field(:email, required: 1, class: 'focus')
+    .form-section
+      = form.label(:message, 'Comments')
+      = form.text_area(:message)
+      .form-remark
+        To make it easier for us to verify that this person should have access
+        any explanation you can provide is greatly appreciated.
+
+    = form.submit('Send')

@@ -1,0 +1,11 @@
+%h1
+  Bad Date List
+
+= cms_snippet_content('about-bdc', @cms_site).html_safe
+%br
+%br
+- if (@reports)
+  - if (@reports.any?)
+    %h3
+      Recent logged reports
+    = render(partial: 'report_results', locals: {reports: @reports})

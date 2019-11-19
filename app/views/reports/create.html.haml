@@ -1,0 +1,8 @@
+.row
+  .col-md-12
+    .options
+      = link_to('Report Another', new_report_path, class: 'btn')
+    %h2
+      Thanks for filling out that report.
+
+= cms_snippet_content('post_report', @cms_site).html_safe

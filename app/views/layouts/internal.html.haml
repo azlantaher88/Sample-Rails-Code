@@ -1,0 +1,6 @@
+!!!
+%html{ lang: I18n.locale }
+  = render('layouts/comfy/admin/cms/head')
+  = render('layouts/comfy/admin/cms/body')
+  - if (@site && !@site.new_record?)
+    = render('comfy/admin/cms/files/modal')

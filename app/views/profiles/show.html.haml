@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    %h1
+      My Account
+
+.row
+  .col-md-12
+    - if (session_user.trusted?)
+      %p
+        You're a trusted member of the Bad Date List community.
+
+      %p
+        If you'd like to invite someone to be a member of the Bad Date List,
+        you can
+        = link_to('Send an Invitation', new_invitation_path, style: 'btn btn-sm btn-default')
+    - elsif (session_user.confirmed?)
+      %p
+        Your account's email address has been confirmed, but your account is
+        still being reviewed.
+    - else
+      %p
+        Your account's email address has not been confirmed. If you need
+        another email notification,
+        = link_to('click here', user_confirmation_path('user[email]' => session_user.email), method: :post) + '.'
+

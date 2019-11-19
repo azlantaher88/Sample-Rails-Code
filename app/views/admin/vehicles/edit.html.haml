@@ -1,0 +1,16 @@
+%h3
+  Vehicle
+
+- if (@vehicle.errors.full_messages.any?)
+  .bs-callout.bs-callout-danger
+    %h4
+      Problem Updating
+    %p
+      There are some problems with this vehicle that you need to
+      correct before it can be updated.
+
+= form_for(@vehicle, url: admin_vehicle_path(@vehicle), method: :put) do |form|
+  = render(partial: 'form', object: form)
+  .submit
+    = submit_tag('Update', class: 'btn btn-sm btn-primary')
+    = link_to('Cancel', admin_vehicle_path(@vehicle), class: 'btn btn-sm btn-default')

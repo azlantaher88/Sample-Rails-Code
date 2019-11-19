@@ -1,0 +1,6 @@
+/.bundle
+/log/*
+!/log/.keep
+/tmp
+.DS_Store
+/.hostname

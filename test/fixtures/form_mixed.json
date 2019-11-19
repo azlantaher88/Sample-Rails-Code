@@ -1,0 +1,44 @@
+{
+  "title": "Person",
+  "id": "person",
+  "target": "person",
+  "type": "section",
+  "data": [
+    {
+      "title": "Name",
+      "required": true
+    },
+    {
+      "title": "Age"
+    },
+    {
+      "title": "Hair",
+      "required": true,
+      "type": "select",
+      "data": [
+        {
+          "title": "Brown"
+        },
+        {
+          "title": "Blonde"
+        }
+      ]
+    },
+    {    
+      "title": "Locations",
+      "type": "options",
+      "data": [
+        {
+          "title": "Indoors"
+        },
+        {
+          "title": "Outdoors"
+        },
+        {
+          "title": "Vehicle",
+          "input": true
+        }
+      ]
+    }
+  ]
+}

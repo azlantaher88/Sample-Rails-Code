@@ -1,0 +1,35 @@
+%h2
+  Vehicles
+
+= selection_nav
+
+= paginate(@vehicles)
+
+%table.admin
+  %thead
+    %tr
+      %th
+        ID
+      %th{ style: 'width: 60%' }
+        Name
+      %th
+        Status
+      %th
+        Timeline
+  %tbody
+    - @vehicles.each do |vehicle|
+      %tr.lg
+        %td
+          = link_to(vehicle.id, admin_vehicle_path(vehicle))
+        %td
+          = link_to(vehicle.license, admin_vehicle_path(vehicle))
+        %td
+        %td
+          = vehicle.created_at.to_s(:long)
+          .action
+            Reported
+    - if (@vehicles.empty?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No vehicles found.

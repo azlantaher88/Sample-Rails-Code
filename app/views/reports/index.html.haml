@@ -1,0 +1,20 @@
+.options
+  = link_to('Report Bad Date', new_report_path, class: 'btn btn-sm')
+  - if (allow_reports_search?)
+    = link_to('Search Bad Dates', search_reports_path, class: 'btn btn-sm')
+
+%h1
+  %b
+    Reports
+
+.reports{ style: 'clear: both; margin-top: 10px' }
+  - if (@news_items.empty?)
+    .empty
+      There is no news at this time.
+  - @news_items.each do |news_item|
+    %p.report
+      %h3
+        = news_item.headline
+      .content
+        = news_item.content.html_safe
+

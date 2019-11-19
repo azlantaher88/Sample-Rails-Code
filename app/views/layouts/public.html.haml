@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    = render(partial: 'layouts/head')
+  %body#l-public
+    #header
+      .content
+        .top
+          = link_to('', '/', class: 'logo')
+          .masthead
+            %h1
+              = link_to('Bad Date List', '/')
+            %h4.subhead.min-600
+              Dedicated to improving safety for people involved in sex work
+
+        %ul#nav
+          %li.min-desktop
+            - if (session_user)
+              = link_to('My Account', profile_path)
+            - else
+              = link_to('Home', root_path)
+          %li
+            = link_to('Reports', reports_path)
+          - case (session_user_role)
+          - when 'admin'
+            %li
+              = link_to('Admin', admin_reports_path)
+            %li.min-480
+              = link_to('Logout', destroy_user_session_path, method: :delete)
+          - when 'guest'
+            %li
+              = link_to('Login', user_session_path)
+          - else
+            %li
+              = link_to('Logout', destroy_user_session_path, method: :delete)
+          - if Comfy::Cms::Site.first
+            -Comfy::Cms::Site.first.pages.root.children.published.each do |page|
+              %li.min-desktop
+                = link_to page.label, page.url(:relative)
+
+    #content
+      .container-fluid
+        = render(partial: 'layouts/flash')
+        = yield

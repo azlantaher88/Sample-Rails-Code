@@ -1,0 +1,37 @@
+.form-group{ class: form_group_class(@identifier_type, :code) }
+  %label.control-label{ for: 'identifier_type_code' }
+    Code
+  = form.text_field(:code, class: 'form-control', readonly: @identifier_type.required?)
+  .required
+    - if (@identifier_type.required?)
+      Locked
+    - else
+      Required
+
+.form-group{ class: form_group_class(@identifier_type, :label) }
+  %label.control-label{ for: 'identifier_type_label' }
+    Public Label
+  = form.text_field(:label, class: 'form-control')
+  .required
+    Required
+
+.form-group
+  %label.control-label{ for: 'identifier_type_record_type' }
+    Record Type
+  = form.select(:record_type, IdentifierType.record_types, class: 'form-control')
+  .required
+    Required
+
+.form-group
+  %label.control-label{ for: 'identifier_type_selection_type' }
+    Selection Type
+  = form.select(:selection_type, IdentifierType.selection_types.invert, class: 'form-control')
+  .required
+    Required
+
+.form-group
+  = form.check_box(:input, class: '')
+  %label.control-label{ for: 'identifier_type_input' }
+    Allow User Input
+  .required
+    Required

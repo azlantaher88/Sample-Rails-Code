@@ -1,0 +1,23 @@
+%h4
+  Membership
+
+%table.admin
+  %thead
+    %tr
+      %th
+        Email
+      %th
+        Role
+  %tbody
+    - @mailing_list.users.each do |user|
+      %tr.lg
+        %td
+          = link_to(user.email, admin_member_path(user))
+        %td
+          .tag{ class: h(user.effective_role) }
+            = user.effective_role.titleize
+    - if (@mailing_list.users.empty?)
+      %tr
+        %td{ colspan: 2 }
+          .empty
+            No users found.

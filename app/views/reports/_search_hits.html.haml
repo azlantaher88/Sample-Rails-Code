@@ -1,0 +1,8 @@
+- search_hits.each do |hit|
+  .search_hit
+    %h4
+      = hit.description
+
+    - hit.reports.each do |report|
+      .report
+        = link_to(report.description, report_path(report))

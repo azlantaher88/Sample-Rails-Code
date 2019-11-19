@@ -1,0 +1,20 @@
+%head
+  %meta{ 'http-equiv' => 'Content-type', :content => 'text/html; charset=utf-8' }
+  %title
+    = ComfortableMexicanSofa.config.cms_title
+  = csrf_meta_tag
+
+  = stylesheet_link_tag('comfy/admin/cms/application')
+  = stylesheet_link_tag('l-internal')
+  = javascript_include_tag('comfy/admin/cms/application')
+  = javascript_include_tag('common')
+
+  - if (@site && @site.persisted?)
+    :javascript
+      CMS.file_upload_path = '#{comfy_admin_cms_site_files_path(@site)}';
+      CMS.pages_path = '#{comfy_admin_cms_site_pages_path(@site)}';
+      CMS.locale = '#{I18n.locale}';
+
+  = yield(:head)
+
+  = render('comfy/admin/cms/partials/html_head')

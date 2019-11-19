@@ -1,0 +1,7 @@
+%h4
+  = @report.description
+
+= render(partial: 'reports/show_elements', object: @report.reduced)
+.version
+  Version
+  = @report.version.version

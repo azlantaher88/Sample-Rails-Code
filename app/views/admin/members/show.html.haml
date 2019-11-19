@@ -1,0 +1,107 @@
+%h3
+  User
+
+%table.table.admin
+  %tbody
+    %tr
+      %th
+        Email
+      %td
+        = @user.email
+        - unless (@user.confirmed?)
+          .tag.unconfirmed
+            Unconfirmed
+
+    - if (@user.unconfirmed_email?)
+      %tr
+        %th
+          New Email
+        %td
+          = @user.unconfirmed_email
+          %span.annotation
+            Unconfirmed
+
+    - if (@user.name?)
+      %tr
+        %th
+          Name
+        %td
+          = @user.name
+
+    - if (@user.organization?)
+      %tr
+        %th
+          Organization
+        %td
+          = @user.organization
+
+    - if (@user.mailing_lists.any?)
+      %tr
+        %th
+          Mailing Lists
+        %td
+          - @user.mailing_lists.each do |mailing_list|
+            %div
+              = mailing_list.name
+
+    - if (@user.invitation)
+      %tr
+        %th
+          Invitation
+        %td
+          This user was
+          = link_to('invited', admin_invitation_path(@user.invitation))
+          by
+          - if (inviting_user = @user.invitation.inviting_user)
+            = link_to(inviting_user.email, admin_member_path(inviting_user))
+          - else
+            someone who was deleted
+          on
+          = @user.invitation.created_at.to_s(:long)
+
+    %tr
+      %th
+        Registration
+      %td
+        = @user.created_at.to_s(:long)
+        = '(%s ago)' % time_ago_in_words(@user.created_at)
+
+    %tr
+      %th
+        Status
+      %td
+        = render(partial: 'admin/members/tags', object: @user)
+
+    - User.flags.each do |flag|
+      - if (@user.send("#{flag}?"))
+        %tr
+          %th
+            = flag.to_s.titleize
+          %td
+            = @user.send("#{flag}_at").to_s(:long)
+            - if (@user.respond_to?("#{flag}_by_user"))
+              - if (by = @user.send("#{flag}_by_user"))
+                by
+                = by.name? ? by.name : by.email
+
+    %tr
+      %th
+        Signup Request
+      %td.contained
+        = simple_format(h(@user.signup_request))
+
+.submit
+  - case (@user.effective_role)
+  - when 'banned'
+    = link_to('Reinstate Access', reinstate_admin_member_path(@user), class: 'btn btn-sm btn-primary', method: :put)
+  - when 'registered','guest'
+    = link_to('Approve', approve_admin_member_path(@user), class: 'btn btn-sm btn-primary', method: :put)
+    = link_to('Reject', reject_admin_member_path(@user), class: 'btn btn-sm btn-danger', method: :put)
+  - when 'rejected'
+    = link_to('Approve', approve_admin_member_path(@user), class: 'btn btn-sm btn-primary', method: :put)
+  - else
+    = link_to('Ban Access', ban_admin_member_path(@user), class: 'btn btn-sm btn-danger', method: :put)
+  - if (!@user.confirmed? or @user.unconfirmed_email?)
+    = link_to('Manual Confirmation', confirm_admin_member_path(@user), class: 'btn btn-sm btn-default', method: :put)
+      
+  = link_to('Edit', edit_admin_member_path(@user), class: 'btn btn-sm btn-default')

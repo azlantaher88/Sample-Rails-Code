@@ -1,0 +1,3 @@
+.record-filters.btn-group
+  - selection_config.each do |name, config|
+    = link_to(config[:label], selection_params(config[:path]), class: (%w[ btn btn-sm btn-default ] + (selection_active == name ? %w[ active ] : [ ])).join(' '))

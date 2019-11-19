@@ -1,0 +1,12 @@
+.question{ class: report_missing?(form_select['id']) ? 'missing' : nil }
+  .title
+    = form_select['title']
+    - if (report_required?(form_select['id']))
+      .required{ class: report_missing?(form_select['id']) ? 'missing' : nil }
+        * Required
+
+  - if (form_select['hint'])
+    .hint
+      = form_select['hint']
+
+  = select_tag('report[content][%s]' % form_select['id'], options_for_select(select_options_from_data(form_select['data']), selected: report_value(form_select['id'])))

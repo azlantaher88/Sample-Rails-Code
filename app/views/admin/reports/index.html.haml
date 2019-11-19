@@ -1,0 +1,78 @@
+.row
+  .col-md-6
+    %h2
+      Reports
+  .col-md-6.search_option
+    = form_tag(admin_reports_path(selection_params), method: :get) do
+      = text_field_tag(:q, params[:q], class: 'form-control focus')
+      = submit_tag('Search', class: 'btn btn-sm btn-primary')
+
+- if (params[:tag])
+  .tag_filter
+    Showing only entries tagged
+    - case (params[:tag][0,1])
+    - when '#'
+      .tag.admin-tag
+        = tag_label(params[:tag])
+    - else
+      .tag
+        = tag_label(params[:tag])
+    = link_to('Clear', admin_reports_path(selection_params(tag: nil)), class: 'btn btn-xs btn-default')
+
+= selection_nav
+
+= paginate(@reports)
+
+%table.admin
+  %thead
+    %tr
+      %th{ width: '12%' }
+        Number
+      %th{ width: '60%' }
+        Details
+      %th
+        Timeline
+  %tbody
+    - unless (@reports.any?)
+      %tr.lg
+        %td{ colspan: 3 }
+          .empty
+            No reports found.
+    - @reports.each do |report|
+      %tr.lg
+        %td
+          = link_to(report.id, admin_report_path(report))
+          - if (report.published?)
+            %br/
+            .tag.published
+              Published
+          - if (report.news_item)
+            %br/
+            .tag.alerted
+              Alerted
+        %td
+          - if (report.tags)
+            - report.tags.each do |tag|
+              - case (tag[0,1])
+              - when '#'
+                = link_to(tag_label(tag), admin_reports_path(selection_params(tag: tag)), class: 'tag admin-tag')
+              - else
+                = link_to(tag_label(tag), admin_reports_path(selection_params(tag: tag)), class: 'tag')
+            - if (report.description.present?)
+              %br/
+              = report.description
+        %td
+          .timeline
+            = report.created_at.to_s(:long)
+            .action
+              Created
+            - if (report.published?)
+              .flag.published
+                = report.published_at.to_s(:long)
+                .action
+                  Published
+            - if (report.news_item)
+              .flag.alerted
+                = report.news_item.created_at.to_s(:long)
+                .action
+                  Alerted

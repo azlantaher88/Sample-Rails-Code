@@ -1,0 +1,45 @@
+%h3
+  Bad Date
+
+%table.table
+  %tbody
+    %tr
+      - if (@person.name?)
+        %th
+          Name
+        %td
+          = @person.name
+    %tr
+      - if (@person.email_r?)
+        %th
+          Email
+        %td
+          = @person.email_r
+    %tr
+      - if (@person.phone_r?)
+        %th
+          Phone
+        %td
+          = @person.phone_r
+    %tr
+      %th
+        Reported At
+      %td
+        = @person.created_at.to_s(:long)
+        = '(%s ago)' % time_ago_in_words(@person.created_at)
+
+
+.submit
+  = link_to('Edit', edit_admin_person_path(@person), class: 'btn btn-sm btn-default')
+  = link_to('Delete', admin_person_path(@person), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure you want to delete this person?" })
+
+- right_column do
+  .mini_help
+    - if (@person.reports.any?)
+      .checklist
+        Linked Reports
+      %ul.checklist_items
+        - @person.reports.each do |report|
+          %li
+            = link_to('Report %d' % report.id, admin_report_path(report))
+            = '(%s)' % report.created_at.to_s(:short)

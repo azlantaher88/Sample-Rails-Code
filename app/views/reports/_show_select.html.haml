@@ -1,0 +1,9 @@
+.question
+  .title
+    = show_select['title'] + ':'
+    %span.value
+      = report_selection(show_select['id'])
+
+    - if (@tag_display and show_select['tag'])
+      .tag
+        = show_select['tag']

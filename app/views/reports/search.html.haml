@@ -1,0 +1,33 @@
+%h1
+  Bad Date Search
+
+.report_search_form
+  = form_tag({ url: search_reports_path }, { method: :get }) do
+    = text_field_tag(:fname, params[:fname], class: 'focus', placeholder: 'First Name')
+    = text_field_tag(:lname, params[:lname], class: 'focus', placeholder: 'Last Name')
+    = text_field_tag(:email, params[:email], class: 'focus', placeholder: 'Email')
+    = text_field_tag(:phno, params[:phno], class: 'focus', placeholder: 'Phone Number')
+
+    
+    = submit_tag('Search by Person')
+
+  = form_tag({ url: search_reports_path }, { method: :get }) do
+    = text_field_tag(:licno1, params[:licno1], class: 'focus', placeholder: 'ABC')
+    = "-"
+    = text_field_tag(:licno2, params[:licno2], class: 'focus', placeholder: '1234')
+
+    = submit_tag('Search by Vehicle')
+
+- if (@reports)
+  - if (@reports.any?)
+    = render(partial: 'search_hits', object: @reports)
+  - else 
+    %p
+      No matches were found containing that text. This does not necessarily
+      mean that the vehicle or person you're looking for has not been reported.
+      They may use an alias, an alternate phone number, email address, or
+      vehicle.
+- else
+  %p
+    You can search the Bad Date List for things like phone numbers, email
+    addresses, license plates, and names.

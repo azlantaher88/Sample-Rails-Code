@@ -1,0 +1,29 @@
+%h1
+  = @form.name
+
+.report_form
+  - if (@report.errors.present?)
+    .error
+      Please ensure all required sections are filled out.
+  = form_tag(admin_report_path(@report), method: :put) do
+    .admin-section
+      %h4
+        Admin Notes
+      .form-group.admin-field
+        %label.key{ for: 'report[description]' }
+          Description
+        .value
+          = text_field_tag('report[description]', @report.description, class: 'form-control')
+        .note
+          This description is used to identify reports, so try and keep it
+          short but distinctive.
+      .form-group.admin-field
+        %label{ for: 'report[admin_tags]' }
+          Tags
+        .value
+          = text_field_tag('report[admin_tags]', @report.admin_tags, class: 'form-control')
+    = render(partial: 'reports/form_elements', object: @version.content)
+
+    .submit
+      = submit_tag('Update', class: 'btn btn-sm btn-primary')
+      = link_to('Cancel', admin_report_path(@report), class: 'btn btn-sm btn-default')

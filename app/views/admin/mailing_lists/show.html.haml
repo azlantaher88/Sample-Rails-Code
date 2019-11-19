@@ -1,0 +1,48 @@
+%h3
+  Mailing List
+
+.row
+  .col-md-2
+    %strong
+      Name
+  .col-md-10
+    = @mailing_list.name
+
+.row
+  .col-md-2
+    %strong
+      Membership
+  .col-md-10
+    - if (roles = @mailing_list.roles)
+      = roles.collect(&:titleize).join(', ')
+
+.row
+  .col-md-2
+    %strong
+      Created At
+  .col-md-10
+    = @mailing_list.created_at.to_s(:long)
+    = '(%s ago)' % time_ago_in_words(@mailing_list.created_at)
+
+- if (@mailing_list.published?)
+  .row
+    .col-md-2
+      %strong
+        Published At
+    .col-md-10
+      = @mailing_list.published_at.to_s(:long)
+      = '(%s ago)' % time_ago_in_words(@mailing_list.published_at)
+
+= render(partial: 'membership')
+
+.submit
+  - if (@mailing_list.published?)
+    = link_to('Unpublish', admin_mailing_list_path(@mailing_list, published: 0), class: 'btn btn-sm btn-danger', method: :put)
+  - else
+    - if (@mailing_list.special?)
+      .notice
+        This is a special mailing list that can't be modified.
+    - else
+      = link_to('Publish', admin_mailing_list_path(@mailing_list, published: 1), class: 'btn btn-sm btn-success', method: :put)
+      = link_to('Edit', edit_admin_mailing_list_path(@mailing_list), class: 'btn btn-sm btn-default')
+      = link_to('Delete', admin_mailing_list_path(@mailing_list), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure you want to delete this mailing list?" })

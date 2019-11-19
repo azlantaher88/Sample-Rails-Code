@@ -1,0 +1,11 @@
+.mini_help
+  %h4
+    Invite New Members
+
+  - case (session_user.role)
+  - when 'admin'
+    %p
+      As an admin, you can invite people to the system. When they register
+      they can be automatically approved with a pre-selected role.
+
+  = link_to('Invite By Email', new_invitation_path, class: 'btn btn-sm btn-default')

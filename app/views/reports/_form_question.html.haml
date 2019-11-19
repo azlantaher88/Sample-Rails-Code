@@ -1,0 +1,17 @@
+.question{ class: report_missing?(form_question['id']) ? 'missing' : nil }
+  .title
+    = form_question['title']
+
+    - if (report_required?(form_question['id']))
+      .required{ class: report_missing?(form_question['id']) ? 'missing' : nil }
+        * Required
+
+  - if (form_question['hint'])
+    .hint
+      = form_question['hint']
+
+  - case (form_question['lines'])
+  - when Fixnum
+    = text_area_tag('report[content][%s]' % form_question['id'], @report.content[form_question['id']], cols: 60, rows: form_question['lines'], class: 'question_input')
+  - else
+    = text_field_tag('report[content][%s]' % form_question['id'], @report.content[form_question['id']], class: 'question_input')

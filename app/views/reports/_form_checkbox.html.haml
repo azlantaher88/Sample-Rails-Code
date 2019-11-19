@@ -1,0 +1,7 @@
+.options{ class: report_missing?(form_checkbox['id']) ? 'missing' : nil }
+  .option
+    = check_box_tag('report[content][%s][]' % form_checkbox['id'], form_checkbox['id'], report_checked?(form_checkbox['id'], form_checkbox['id']), id: form_checkbox['id'])
+    %label{ for: form_checkbox['id'] }
+      = form_checkbox['title']
+    - if (form_checkbox['input'])
+      = text_field_tag('report[content][%s]' % form_checkbox['id'], report_value(form_checkbox['id']), class: 'option-input', id: form_checkbox['id'] + '-input')

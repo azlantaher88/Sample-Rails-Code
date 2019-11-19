@@ -1,0 +1,32 @@
+= render('comfy/admin/cms/partials/navigation_before')
+
+%h3
+  Bad Date List
+
+.list-group
+  = active_link_to('Reports', admin_reports_path, class: 'list-group-item')
+  = active_link_to('Alerts', admin_alerts_path, class: 'list-group-item')
+  = active_link_to('Bad Dates', admin_people_path, class: 'list-group-item')
+  = active_link_to('Vehicles', admin_vehicles_path, class: 'list-group-item')
+  = active_link_to('Members', admin_members_path, class: 'list-group-item')
+  = active_link_to('Invitations', admin_invitations_path, class: 'list-group-item')
+  = active_link_to('News Items', admin_news_items_path, class: 'list-group-item')
+  = active_link_to('Mailing Lists', admin_mailing_lists_path, class: 'list-group-item')
+  = active_link_to('Identifiers', admin_identifier_types_path, class: 'list-group-item')
+
+.list-group
+  = active_link_to(t('comfy.admin.cms.base.sites'), comfy_admin_cms_sites_path, active: [ 'comfy/admin/cms/sites' ], class: 'list-group-item')
+  - if (@site && !@site.new_record?)
+    = active_link_to(t('comfy.admin.cms.base.layouts'), comfy_admin_cms_site_layouts_path(@site), class: 'list-group-item')
+    = active_link_to(t('comfy.admin.cms.base.pages'), comfy_admin_cms_site_pages_path(@site), class: 'list-group-item')
+    = active_link_to(t('comfy.admin.cms.base.snippets'), comfy_admin_cms_site_snippets_path(@site), class: 'list-group-item')
+    = active_link_to(t('comfy.admin.cms.base.files'), comfy_admin_cms_site_files_path(@site), class: 'list-group-item')
+
+  = cms_hook(:navigation)
+
+.list-group
+  = link_to('Logout', destroy_user_session_path, class: 'list-group-item', method: :delete)
+
+  = render('comfy/admin/cms/partials/navigation_inner')
+
+= render('comfy/admin/cms/partials/navigation_after')

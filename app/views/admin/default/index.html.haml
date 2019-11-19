@@ -1,0 +1,9 @@
+%h2
+  Admin Dashboard
+
+%h4
+  Reports
+
+.details
+  There are
+  = link_to('%d unpublished reports' % Report.published(false).count, admin_reports_path) + '.'

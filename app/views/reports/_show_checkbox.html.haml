@@ -1,0 +1,9 @@
+.option{ class: show_checkbox['if'] ? ('if-%s' % show_checkbox['if']) : '' }
+  = check_box_tag('report[content][%s][]' % show_checkbox['id'], show_checkbox['id'], report_checked?(show_checkbox['id'], show_checkbox['id']), id: show_checkbox['id'], disabled: true)
+  %label{ for: show_checkbox['id'] }
+    = show_checkbox['title']
+  - if (show_checkbox['input'])
+    = text_field_tag('report[content][%s]' % show_checkbox['id'], report_value(show_checkbox['id']), disabled: true)
+  - if (@tag_display and show_checkbox['tag'])
+    .tag
+      = show_checkbox['tag']
