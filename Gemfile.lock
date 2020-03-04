@@ -114,10 +114,6 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    dotenv (2.7.2)
-    dotenv-rails (2.7.2)
-      dotenv (= 2.7.2)
-      railties (>= 3.2, < 6.1)
     erubi (1.7.0)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -195,7 +191,7 @@ GEM
       json (>= 1.8)
       mail (~> 2.4)
     public_suffix (3.0.0)
-    puma (3.10.0)
+    puma (3.12.4)
     rack (2.0.3)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
@@ -290,7 +286,6 @@ DEPENDENCIES
   comfortable_mexican_sofa (>= 1.12.10)!
   date_flag
   devise
-  dotenv-rails
   faker
   haml
   jquery-rails
