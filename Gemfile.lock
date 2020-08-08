@@ -114,10 +114,6 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    dotenv (2.7.2)
-    dotenv-rails (2.7.2)
-      dotenv (= 2.7.2)
-      railties (>= 3.2, < 6.1)
     erubi (1.7.0)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -161,7 +157,8 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    kramdown (1.15.0)
+    kramdown (2.3.0)
+      rexml
     libv8 (3.16.14.19)
     loofah (2.1.1)
       crass (~> 1.0.2)
@@ -233,6 +230,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rexml (3.2.4)
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
     sass (3.5.2)
@@ -290,7 +288,6 @@ DEPENDENCIES
   comfortable_mexican_sofa (>= 1.12.10)!
   date_flag
   devise
-  dotenv-rails
   faker
   haml
   jquery-rails
